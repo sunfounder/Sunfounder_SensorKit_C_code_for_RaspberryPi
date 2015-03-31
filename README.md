@@ -1,2 +1,8 @@
-# Sunfounder_SensorKit_C_code_for_RaspberryPi
-Sunfounder SensorKit C code for Raspberry Pi
+# Sunfounder Sensor Kit C code for Raspberry Pi
+
+website:
+	www.sunfounder.com
+
+E-mail:
+	support@sunfounder.com
+
