@@ -1,5 +1,14 @@
+/*
+ * update with real temperature calculation
+ *
+ * compile with -lm for math library
+ *
+ * gcc analogTempSensor.c -lwiringPi -lm
+ */
+
 #include <wiringPi.h>
 #include <stdio.h>
+#include <math.h>
 
 typedef unsigned char uchar;
 typedef unsigned int uint;
@@ -53,7 +62,7 @@ uchar get_ADC_Result(void)
 int main(void)
 {
 	uchar analogVal;
-	uchar temp;
+	double Vr, Rt, temp;
 
 	if(wiringPiSetup() == -1){ //when initialize wiring failed,print messageto screen
 		printf("setup wiringPi failed !");
@@ -67,8 +76,11 @@ int main(void)
 		pinMode(ADC_DIO, OUTPUT);
 
 		analogVal = get_ADC_Result();
-		temp = 60 - analogVal;
-		printf("Current temperature : %d\n", temp);
+		Vr = 5 * (double)(analogVal) / 255;
+		Rt = 10000 * (double)(Vr) / (5 - (double)(Vr));
+		temp = 1 / (((log(Rt/10000)) / 3950)+(1 / (273.15 + 25)));
+		temp = temp - 273.15;
+		printf("Current temperature : %d C\n", temp);
 		delay(500);
 	}
 
