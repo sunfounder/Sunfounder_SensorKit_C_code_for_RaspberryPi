@@ -80,7 +80,7 @@ int main(void)
 		Rt = 10000 * (double)(Vr) / (5 - (double)(Vr));
 		temp = 1 / (((log(Rt/10000)) / 3950)+(1 / (273.15 + 25)));
 		temp = temp - 273.15;
-		printf("Current temperature : %d C\n", temp);
+		printf("Current temperature : %d C\n", (int)temp);
 		delay(500);
 	}
 
